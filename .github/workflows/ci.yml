@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install chromium
+
+      - name: Check syntax
+        run: npm run check
+
+      - name: Run tests
+        run: npm test
+
+      - name: Smoke run watcher
+        env:
+          APPLUS_LICENSE_PLATE: 5774KMW
+          APPLUS_CONTACT_EMAIL: smoke@example.com
+          APPLUS_CONTACT_PHONE: 600000000
+          APPLUS_MIN_DATE: 2099-01-01
+          TELEGRAM_BOT_TOKEN: smoke-token
+          TELEGRAM_CHAT_ID: smoke-chat
+          HEADLESS: true
+          RUN_ONCE: true
+          SEND_STARTUP_NOTIFICATION: false
+          HEARTBEAT_INTERVAL_MINUTES: 999999
+        run: node src/index.js

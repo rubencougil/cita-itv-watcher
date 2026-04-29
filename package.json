@@ -7,7 +7,7 @@
     "start": "node src/index.js",
     "landing": "node scripts/serve-landing.js",
     "test": "node --test",
-    "check": "node --check src/index.js"
+    "check": "node --check src/index.js && node --check src/applus.js && node --check src/date.js && node --check src/env.js && node --check src/state.js && node --check src/telegram.js"
   },
   "dependencies": {
     "playwright": "^1.49.0"

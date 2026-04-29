@@ -1,5 +1,6 @@
 # Cita ITV Watcher
 
+[![CI](https://github.com/rubencougil/cita-itv-watcher/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/rubencougil/cita-itv-watcher/actions/workflows/ci.yml)
 [![GitHub Actions CI](https://github.com/rubencougil/cita-itv-watcher/actions/workflows/pages.yml/badge.svg?branch=main)](https://github.com/rubencougil/cita-itv-watcher/actions/workflows/pages.yml)
 
 Watcher para la web de Applus+ ITV que revisa disponibilidad de citas y avisa por Telegram cuando detecta huecos a partir de una fecha mínima.
