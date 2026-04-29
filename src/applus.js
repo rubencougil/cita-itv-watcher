@@ -26,6 +26,11 @@ function normalizeUrl(config) {
   return config.applusUrl || DEFAULT_ENTRY_URL;
 }
 
+function shouldRestartFromScratch(error) {
+  const message = error instanceof Error ? error.message : String(error || "");
+  return /No se encontró el botón para continuar con la reserva/i.test(message);
+}
+
 async function dismissCookieBanner(page) {
   const candidates = [
     page.locator("button.ch2-allow-all-btn"),
@@ -413,52 +418,67 @@ async function captureAvailabilityScreenshot(page, report) {
 
 export async function runApplusCheck(config) {
   const url = normalizeUrl(config);
-  const browser = await chromium.launch({ headless: config.headless });
-  const context = await browser.newContext({
-    locale: config.applusLanguage || "es-ES",
-    viewport: { width: 1440, height: 1400 },
-  });
-  const page = await context.newPage();
+  const maxAttempts = 2;
 
-  try {
-    await page.goto(url, { waitUntil: "domcontentloaded", timeout: 45000 });
-    await dismissCookieBanner(page);
-    await fillVehicleData(page, config);
-    await clickSearchButton(page);
-    await page.waitForLoadState("domcontentloaded", { timeout: 45000 }).catch(() => {});
-    await fillContactData(page, config);
-    await submitContactForm(page);
-    await page.waitForTimeout(2000).catch(() => {});
-    const calendarOpenMethod = await openCalendarStep(page);
-    await page.waitForSelector('.dia_detalle', { timeout: 15000 }).catch(() => {});
-    await page.waitForTimeout(1000);
-    const targetMonth = String(config.minDate).slice(0, 7);
-    const visibleMonth = await advanceCalendarToMonth(page, targetMonth).catch(() => null);
-    if (visibleMonth && compareYearMonth(visibleMonth, targetMonth) >= 0) {
-      await page.waitForSelector('.dia_detalle', { timeout: 15000 }).catch(() => {});
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    const browser = await chromium.launch({ headless: config.headless });
+    const context = await browser.newContext({
+      locale: config.applusLanguage || "es-ES",
+      viewport: { width: 1440, height: 1400 },
+    });
+    const page = await context.newPage();
+
+    try {
+      await page.goto(url, { waitUntil: "domcontentloaded", timeout: 45000 });
+      await dismissCookieBanner(page);
+      await fillVehicleData(page, config);
+      await clickSearchButton(page);
+      await page.waitForLoadState("domcontentloaded", { timeout: 45000 }).catch(() => {});
+      await fillContactData(page, config);
+      await submitContactForm(page);
+      await page.waitForTimeout(2000).catch(() => {});
+      const calendarOpenMethod = await openCalendarStep(page);
+      await page.waitForSelector(".dia_detalle", { timeout: 15000 }).catch(() => {});
       await page.waitForTimeout(1000);
-    }
+      const targetMonth = String(config.minDate).slice(0, 7);
+      const visibleMonth = await advanceCalendarToMonth(page, targetMonth).catch(() => null);
+      if (visibleMonth && compareYearMonth(visibleMonth, targetMonth) >= 0) {
+        await page.waitForSelector(".dia_detalle", { timeout: 15000 }).catch(() => {});
+        await page.waitForTimeout(1000);
+      }
 
-    const report = await inspectAvailability(page, config);
-    const isMatch = report.matchingDates.length > 0 && !report.hasNegativeSignal;
-    let screenshotBuffer = null;
-    let screenshotVariant = null;
-    if (isMatch) {
-      const capture = await captureAvailabilityScreenshot(page, report).catch(() => null);
-      screenshotBuffer = capture?.buffer || null;
-      screenshotVariant = capture?.variant || null;
-    }
+      const report = await inspectAvailability(page, config);
+      const isMatch = report.matchingDates.length > 0 && !report.hasNegativeSignal;
+      let screenshotBuffer = null;
+      let screenshotVariant = null;
+      if (isMatch) {
+        const capture = await captureAvailabilityScreenshot(page, report).catch(() => null);
+        screenshotBuffer = capture?.buffer || null;
+        screenshotVariant = capture?.variant || null;
+      }
 
-    return {
-      ...report,
-      isMatch,
-      screenshotBuffer,
-      calendarOpenMethod,
-      screenshotVariant,
-    };
-  } finally {
-    await page.close().catch(() => {});
-    await context.close().catch(() => {});
-    await browser.close().catch(() => {});
+      return {
+        ...report,
+        isMatch,
+        screenshotBuffer,
+        calendarOpenMethod,
+        screenshotVariant,
+      };
+    } catch (error) {
+      if (shouldRestartFromScratch(error) && attempt < maxAttempts) {
+        console.warn(
+          "Applus+ no mostró el botón para continuar. Reiniciando la comprobación desde el principio...",
+        );
+        continue;
+      }
+
+      throw error;
+    } finally {
+      await page.close().catch(() => {});
+      await context.close().catch(() => {});
+      await browser.close().catch(() => {});
+    }
   }
+
+  throw new Error("La comprobación de Applus+ no pudo completarse tras reiniciarse.");
 }
