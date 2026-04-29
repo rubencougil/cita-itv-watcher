@@ -23,78 +23,69 @@
   <body>
     <div class="page">
       <main class="hero">
-        <div class="topline">Node.js ≥ 18 · Playwright · Telegram · Windows · macOS · Linux</div>
-        <p class="eyebrow">⏰ ITV Watcher</p>
-        <h1>Avisa por Telegram cuando Applus+ libere una cita de ITV.</h1>
+        <div class="chips">
+          <span class="chip chip--green">• Node.js ≥ 18</span>
+          <span class="chip chip--blue">Playwright</span>
+          <span class="chip chip--gray">Windows · macOS · Linux</span>
+        </div>
+        <h1>⏰ ITV<br />Watcher</h1>
         <p class="lead">
-          Proyecto público en GitHub que monitoriza la disponibilidad de citas ITV en Applus+, respeta tu
-          fecha mínima y te avisa por Telegram en cuanto detecta huecos compatibles.
+          Software que monitoriza la disponibilidad de citas para la ITV en Applus+ y te avisa por Telegram
+          en cuanto se libera un hueco, sin que tengas que estar pendiente de la página.
         </p>
         <div class="actions">
           <a class="button button--primary" href="https://github.com/rubencougil/cita-itv-watcher" target="_blank" rel="noreferrer">⭐ Ver en GitHub</a>
-          <a class="button button--ghost" href="https://github.com/rubencougil/cita-itv-watcher/archive/refs/heads/main.zip" target="_blank" rel="noreferrer">Descargar ZIP</a>
+          <a class="button button--ghost" href="https://github.com/rubencougil/cita-itv-watcher/archive/refs/heads/main.zip" target="_blank" rel="noreferrer">📦 Descargar ZIP</a>
         </div>
       </main>
 
       <section class="section">
-        <div class="section__title">
-          <h2>El problema</h2>
-        </div>
-        <p>
-          Conseguir cita para la ITV suele implicar entrar en la web una y otra vez para comprobar si han
-          aparecido huecos. Cuando no hay un aviso automático, la vigilancia manual se vuelve repetitiva y
-          fácil de olvidar.
-        </p>
-        <p>
-          ITV Watcher hace esa vigilancia por ti y te notifica por Telegram en el momento exacto en que
-          detecta una cita compatible con tu filtro.
-        </p>
+        <h2>El problema</h2>
+        <p>Renovar la ITV suele implicar revisar la web una y otra vez para encontrar huecos, y no existe un sistema oficial que te avise cuando aparecen citas disponibles.</p>
+        <p><strong>ITV Watcher</strong> monitoriza la página por ti y te notifica por Telegram en el momento exacto en que se libera una cita, sin que tengas que estar pendiente.</p>
       </section>
 
       <section class="section">
-        <div class="section__title">
-          <h2>Cómo funciona</h2>
+        <h2>Cómo funciona</h2>
+        <div class="cards">
+          <article class="card">
+            <div class="card__num">1</div>
+            <div>
+              <h3>Abre un navegador con Playwright</h3>
+              <p>Rellenas la matrícula y, si hace falta, los datos de contacto una vez.</p>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card__num">2</div>
+            <div>
+              <h3>Monitoriza la página cada N minutos</h3>
+              <p>Detecta cambios y extrae las fechas disponibles automáticamente.</p>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card__num">3</div>
+            <div>
+              <h3>Te avisa por Telegram</h3>
+              <p>Mensaje + captura de pantalla cuando aparece una cita dentro de tu rango aceptable.</p>
+            </div>
+          </article>
         </div>
-        <ol class="steps">
-          <li>
-            <h3>Abre la web de Applus+ y completa el arranque</h3>
-            <p>Rellena la matrícula y, si la web lo pide, introduce los datos de contacto una sola vez.</p>
-          </li>
-          <li>
-            <h3>Vigila el calendario cada N minutos</h3>
-            <p>Detecta cambios, extrae las fechas visibles y aplica la fecha mínima configurada.</p>
-          </li>
-          <li>
-            <h3>Te avisa por Telegram con captura</h3>
-            <p>Envía un mensaje con la información relevante y una captura cuando aparece una cita compatible.</p>
-          </li>
-        </ol>
       </section>
 
       <section class="section" id="inicio-rapido">
-        <div class="section__title">
-          <h2>Inicio rápido</h2>
-        </div>
+        <h2>Inicio rápido</h2>
         <pre><code>$ git clone https://github.com/rubencougil/cita-itv-watcher.git
 $ cd cita-itv-watcher
 $ npm install && npx playwright install chromium
-$ cp .env.example .env  # añade matrícula, Telegram y fecha mínima
+$ cp .env.example .env  # añade tu matrícula, Telegram y fecha mínima
 $ npm start</code></pre>
         <p class="quick-note">Para una sola comprobación: <code>RUN_ONCE=true npm start</code>.</p>
-        <p class="quick-note">
-          Para instrucciones detalladas, configuración y ejemplos consulta el
-          <a href="https://github.com/rubencougil/cita-itv-watcher#readme" target="_blank" rel="noreferrer">README del proyecto →</a>
-        </p>
       </section>
 
       <section class="section section--footer">
-        <p class="footer-links">
-          <a href="https://github.com/rubencougil/cita-itv-watcher" target="_blank" rel="noreferrer">⭐ Ver en GitHub</a>
-          <span>·</span>
-          <a href="https://github.com/rubencougil/cita-itv-watcher/archive/refs/heads/main.zip" target="_blank" rel="noreferrer">Descargar ZIP</a>
-        </p>
         <p class="footer-license">
-          Proyecto público de GitHub · MIT License · No afiliado con Applus+ · No reserva citas automáticamente
+          ⏰ ITV Watcher — MIT License
+          <a href="https://github.com/rubencougil/cita-itv-watcher" target="_blank" rel="noreferrer">github.com/rubencougil/cita-itv-watcher</a>
         </p>
       </section>
     </div>
