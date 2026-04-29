@@ -63,7 +63,13 @@ async function dismissCookieBanner(page) {
 async function fillIfPresent(page, locator, value) {
   try {
     if (await locator.count()) {
-      await locator.first().fill(value, { timeout: 5000 });
+      const field = locator.first();
+      await field.click({ timeout: 5000, force: true }).catch(() => {});
+      try {
+        await field.fill(value, { timeout: 5000 });
+      } catch {
+        await field.type(value, { timeout: 5000 });
+      }
       return true;
     }
   } catch {
@@ -92,15 +98,16 @@ async function fillVehicleData(page, config) {
 
 async function clickSearchButton(page) {
   const buttons = [
-    page.getByRole("link", { name: /Pedir cita ITV ahora/i }),
-    page.getByRole("button", { name: /Pedir cita ITV ahora/i }),
-    page.getByText(/Pedir cita ITV ahora/i, { exact: false }),
+    page.getByRole("link", { name: "Pedir cita ITV ahora" }),
+    page.getByRole("button", { name: "Pedir cita ITV ahora" }),
+    page.getByText("Pedir cita ITV ahora", { exact: true }),
+    page.locator('a[href="#"]'),
   ];
 
   for (const button of buttons) {
     try {
       if (await button.count().catch(() => 0)) {
-        await button.first().click({ timeout: 5000 });
+        await button.first().click({ timeout: 5000, force: true });
         return;
       }
     } catch {
