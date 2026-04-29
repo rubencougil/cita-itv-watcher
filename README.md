@@ -1,15 +1,17 @@
 # Cita ITV Watcher
 
+[![GitHub Actions CI](https://github.com/rubencougil/cita-itv-watcher/actions/workflows/pages.yml/badge.svg?branch=main)](https://github.com/rubencougil/cita-itv-watcher/actions/workflows/pages.yml)
+
 Watcher para la web de Applus+ ITV que revisa disponibilidad de citas y avisa por Telegram cuando detecta huecos a partir de una fecha mínima.
 
 ## Qué hace
 
-- Abre la web de Applus+.
-- Rellena matrícula y, cuando el flujo lo pide, email y teléfono de contacto.
-- Busca señales de disponibilidad en la página.
-- Filtra resultados por una fecha mínima configurable.
-- Envía aviso por Telegram cuando encuentra una cita compatible.
-- Incluye una captura de pantalla de la vista de horas disponibles cuando la web expone huecos compatibles.
+- 🌐 Abre la web de Applus+.
+- 🧾 Rellena matrícula y, cuando el flujo lo pide, email y teléfono de contacto.
+- 🔎 Busca señales de disponibilidad en la página.
+- 📅 Filtra resultados por una fecha mínima configurable.
+- 📬 Envía aviso por Telegram cuando encuentra una cita compatible.
+- 📸 Incluye una captura de pantalla de la vista de horas disponibles cuando la web expone huecos compatibles.
 
 ## Configuración
 

@@ -8,3 +8,4 @@ coverage/
 *.log
 *.tmp
 *.swp
+.tmp-itv-simulacion.jpg
