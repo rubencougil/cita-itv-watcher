@@ -30,7 +30,9 @@
         </div>
         <h1>⏰ ITV<br />Watcher</h1>
         <p class="lead">
-          Software que monitoriza la disponibilidad de citas para la ITV en Applus+ y te avisa por Telegram
+          Software que monitoriza la disponibilidad de citas para la ITV en
+          <a class="inline-link" href="https://aibs.appluscorp.com/?MenuActivo=mrNuevaReserva" target="_blank" rel="noreferrer">Applus+</a>
+          y te avisa por Telegram
           en cuanto se libera un hueco, sin que tengas que estar pendiente de la página.
         </p>
         <div class="actions">
@@ -42,7 +44,12 @@
       <section class="section">
         <h2>El problema</h2>
         <p>Renovar la ITV suele implicar revisar la web una y otra vez para encontrar huecos, y no existe un sistema oficial que te avise cuando aparecen citas disponibles.</p>
-        <p><strong>ITV Watcher</strong> monitoriza la página por ti y te notifica por Telegram en el momento exacto en que se libera una cita, sin que tengas que estar pendiente.</p>
+        <p>
+          <strong>ITV Watcher</strong> monitoriza la página por ti y te notifica por Telegram en el momento
+          exacto en que se libera una cita, sin que tengas que estar pendiente. Si quieres abrirla manualmente,
+          puedes ir a
+          <a class="inline-link" href="https://aibs.appluscorp.com/?MenuActivo=mrNuevaReserva" target="_blank" rel="noreferrer">la página de citas de Applus+</a>.
+        </p>
       </section>
 
       <section class="section">
@@ -74,11 +81,19 @@
 
       <section class="section" id="inicio-rapido">
         <h2>Inicio rápido</h2>
-        <pre><code>$ git clone https://github.com/rubencougil/cita-itv-watcher.git
-$ cd cita-itv-watcher
-$ npm install && npx playwright install chromium
-$ cp .env.example .env  # añade tu matrícula, Telegram y fecha mínima
-$ npm start</code></pre>
+        <div class="terminal">
+          <div class="terminal__bar">
+            <span class="terminal__dot terminal__dot--red"></span>
+            <span class="terminal__dot terminal__dot--amber"></span>
+            <span class="terminal__dot terminal__dot--green"></span>
+            <span class="terminal__label">bash</span>
+          </div>
+          <pre><code>git clone https://github.com/rubencougil/cita-itv-watcher.git
+cd cita-itv-watcher
+npm install && npx playwright install chromium
+cp .env.example .env  # añade tu matrícula, Telegram y fecha mínima
+npm start</code></pre>
+        </div>
         <p class="quick-note">Para una sola comprobación: <code>RUN_ONCE=true npm start</code>.</p>
       </section>
 
