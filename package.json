@@ -1,0 +1,15 @@
+{
+  "name": "cita-itv-watcher",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "landing": "node scripts/serve-landing.js",
+    "test": "node --test",
+    "check": "node --check src/index.js"
+  },
+  "dependencies": {
+    "playwright": "^1.49.0"
+  }
+}

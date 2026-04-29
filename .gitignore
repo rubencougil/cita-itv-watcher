@@ -1,0 +1,10 @@
+node_modules/
+.env
+.itv-watcher-state.json
+.DS_Store
+coverage/
+.vscode/
+.idea/
+*.log
+*.tmp
+*.swp

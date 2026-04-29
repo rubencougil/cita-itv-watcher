@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Watcher para citas ITV de Applus+ con avisos por Telegram y heartbeat configurable."
+    />
+    <title>ITV Watcher</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <main class="hero">
+        <div class="topline">Node.js ≥ 18 · Playwright · Windows · macOS · Linux · MIT License</div>
+        <p class="eyebrow">⏰ ITV Watcher</p>
+        <h1>Monitoriza la ITV y recibe aviso por Telegram cuando aparezca un hueco.</h1>
+        <p class="lead">
+          Software público que monitoriza la disponibilidad de citas para la ITV en Applus+ y te avisa por
+          Telegram en cuanto se libera un hueco, sin que tengas que estar pendiente de la página.
+        </p>
+        <div class="actions">
+          <a class="button button--primary" href="#inicio-rapido">Inicio rápido</a>
+          <a class="button button--ghost" href="https://github.com/rubencougil/cita-itv-watcher" target="_blank" rel="noreferrer">Ver en GitHub</a>
+          <a class="button button--ghost" href="https://github.com/rubencougil/cita-itv-watcher/archive/refs/heads/main.zip" target="_blank" rel="noreferrer">Descargar ZIP</a>
+        </div>
+        <div class="meta">
+          <span>🚗 Matrícula configurable</span>
+          <span>📨 Telegram en tiempo real</span>
+          <span>💓 Heartbeat configurable</span>
+          <span>🌐 Repositorio público</span>
+        </div>
+      </main>
+
+      <section class="section">
+        <div class="section__title">
+          <h2>El problema</h2>
+        </div>
+        <p>
+          Conseguir cita para la ITV suele implicar esperar y revisar la web una y otra vez. No existe un
+          sistema oficial que te avise cuando aparecen huecos disponibles, así que la vigilancia manual se
+          vuelve la única opción.
+        </p>
+        <p>
+          ITV Watcher monitoriza la página por ti y te notifica por Telegram en el momento exacto en que
+          detecta una cita compatible con tu filtro.
+        </p>
+      </section>
+
+      <section class="section">
+        <div class="section__title">
+          <h2>Cómo funciona</h2>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <div class="step__num">1</div>
+            <div>
+              <h3>Abre un navegador con Playwright</h3>
+              <p>Rellena la matrícula y completa el flujo inicial una vez si el sitio lo solicita.</p>
+            </div>
+          </article>
+          <article class="step">
+            <div class="step__num">2</div>
+            <div>
+              <h3>Monitoriza la página cada N minutos</h3>
+              <p>Detecta cambios, extrae las fechas disponibles y aplica tu fecha mínima configurada.</p>
+            </div>
+          </article>
+          <article class="step">
+            <div class="step__num">3</div>
+            <div>
+              <h3>Te avisa por Telegram</h3>
+              <p>Envía un mensaje cuando aparece una cita dentro de tu rango aceptable y mantiene un heartbeat.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="inicio-rapido">
+        <div class="section__title">
+          <h2>Inicio rápido</h2>
+        </div>
+        <div class="codegrid">
+          <article class="codecard">
+            <span>1</span>
+            <h3>Clona el repositorio</h3>
+            <pre><code>git clone https://github.com/rubencougil/cita-itv-watcher.git
+cd cita-itv-watcher</code></pre>
+          </article>
+          <article class="codecard">
+            <span>2</span>
+            <h3>Instala Playwright y configura el entorno</h3>
+            <pre><code>npm install
+npx playwright install chromium
+cp .env.example .env</code></pre>
+            <p>Añade tu matrícula, datos de contacto y credenciales de Telegram.</p>
+          </article>
+          <article class="codecard">
+            <span>3</span>
+            <h3>Arranca el watcher</h3>
+            <pre><code>npm start</code></pre>
+            <p>Si quieres una sola comprobación: <code>RUN_ONCE=true npm start</code></p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section--footer">
+        <p class="footer-links">
+          <a href="https://github.com/rubencougil/cita-itv-watcher" target="_blank" rel="noreferrer">Repositorio</a>
+          <span>·</span>
+          <a href="https://github.com/rubencougil/cita-itv-watcher/archive/refs/heads/main.zip" target="_blank" rel="noreferrer">ZIP</a>
+          <span>·</span>
+          <a href="#inicio-rapido">Inicio rápido</a>
+        </p>
+        <p class="footer-license">ITV Watcher — MIT License</p>
+      </section>
+    </div>
+  </body>
+</html>
